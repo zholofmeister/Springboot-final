@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:selected="http://www.w3.org/1999/xhtml">
+<head>
+  <style>
+    .select_style {width:240px; height:30px; overflow:hidden; no-repeat 215px;
+      border:1px solid #ccc;
+      -moz-border-radius: 5px; /* Gecko browsers */
+      -webkit-border-radius: 5px; /* Webkit browsers */
+      border-radius:5px;
+    }
+    .select_style select { padding:5px; background:transparent; width:268px; font-size: 16px; border:none; height:30px;
+      -webkit-appearance: none; /*for Webkit browsers*/
+    }
+  </style>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>AdminLTE 3 | Projects</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body class="hold-transition sidebar-mini">
+<!-- Site wrapper -->
+<div class="wrapper">
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="show_login" class="nav-link">登出</a>
+      </li>
+    </ul>
+
+    <!-- SEARCH FORM -->
+    <form class="form-inline ml-3" th:action="query_book_info">
+      <div class="input-group input-group-sm">
+        <select name="field" class="select_style">
+          <option value="default">选项</option>
+          <option value="book_id">图书编号</option>
+          <option value="book_name">图书名称</option>
+          <option value="book_boss">出版社</option>
+          <option value="book_writer">作者</option>
+        </select>
+        <input name="stu_id" th:value="${student.stu_id}" hidden="hidden">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input class="form-control form-control-navbar" type="search" placeholder="搜索" aria-label="Search" name="condition">
+        <div class="input-group-append">
+          <button class="btn btn-navbar" type="submit">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      <!-- Messages Dropdown Menu -->
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="far fa-comments"></i>
+          <span class="badge badge-danger navbar-badge">3</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <a href="#" class="dropdown-item">
+            <!-- Message Start -->
+            <div class="media">
+              <img src="../../dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+              <div class="media-body">
+                <h3 class="dropdown-item-title">
+                  Brad Diesel
+                  <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+                </h3>
+                <p class="text-sm">Call me whenever you can...</p>
+                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+              </div>
+            </div>
+            <!-- Message End -->
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <!-- Message Start -->
+            <div class="media">
+              <img src="../../dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <div class="media-body">
+                <h3 class="dropdown-item-title">
+                  John Pierce
+                  <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
+                </h3>
+                <p class="text-sm">I got your message bro</p>
+                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+              </div>
+            </div>
+            <!-- Message End -->
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <!-- Message Start -->
+            <div class="media">
+              <img src="../../dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <div class="media-body">
+                <h3 class="dropdown-item-title">
+                  Nora Silvester
+                  <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
+                </h3>
+                <p class="text-sm">The subject goes here</p>
+                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+              </div>
+            </div>
+            <!-- Message End -->
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+        </div>
+      </li>
+      <!-- Notifications Dropdown Menu -->
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="far fa-bell"></i>
+          <span class="badge badge-warning navbar-badge">15</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <span class="dropdown-item dropdown-header">15 Notifications</span>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-envelope mr-2"></i> 4 new messages
+            <span class="float-right text-muted text-sm">3 mins</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-users mr-2"></i> 8 friend requests
+            <span class="float-right text-muted text-sm">12 hours</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-file mr-2"></i> 3 new reports
+            <span class="float-right text-muted text-sm">2 days</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
+          <i class="fas fa-th-large"></i>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="../../index3.html" class="brand-link">
+      <img src="../../dist/img/AdminLTELogo.png"
+           alt="AdminLTE Logo"
+           class="brand-image img-circle elevation-3"
+           style="opacity: .8">
+      <span class="brand-text font-weight-light">图书管理系统</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block" th:text="${student.stu_name}"></a>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item has-treeview">
+            <a th:href="@{show_projects(stu_id=${student.stu_id},stu_pwd=${student.stu_pwd})}" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                首页
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item has-treeview">
+            <a th:href="@{stu_borrowed_book(stu_id=${student.stu_id})}" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+                已借图书
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+
+        </ul>
+        </li>
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>图书资料库</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Projects</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">图书信息</h3>
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+              <i class="fas fa-minus"></i></button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+              <i class="fas fa-times"></i></button>
+          </div>
+        </div>
+        <div class="card-body p-0">
+          <table class="table table-striped projects">
+            <thead>
+            <tr >
+              <th style="width: 1%">
+                #
+              </th>
+              <th style="width: 20%">
+                图书名称
+              </th>
+              <th style="width: 30%">
+                剩余本数
+              </th>
+              <th>
+                百分比
+              </th>
+              <th style="width: 8%" class="text-center">
+                状态
+              </th>
+              <th style="width: 20%">
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item, itemStat : ${book_list}">
+              <td>
+                #
+              </td>
+              <td>
+                <a th:text="${item.book_name}">
+                </a>
+                <br/>
+                <small th:text="'作者:' + ${item.book_writer}">
+                </small>
+              </td>
+              <td>
+                <ul class="list-inline" th:text="${item.book_nowsum}">
+                </ul>
+              </td>
+              <td class="project_progress">
+                <div class="progress progress-sm">
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 0" style="width: 0%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 1" style="width: 1%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 2" style="width: 2%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 3" style="width: 3%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 4" style="width: 4%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 5" style="width: 5%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 6" style="width: 6%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 7" style="width: 7%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 8" style="width: 8%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 9" style="width: 9%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 10" style="width: 10%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 11" style="width: 11%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 12" style="width: 12%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 13" style="width: 13%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 14" style="width: 14%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 15" style="width: 15%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 16" style="width: 16%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 17" style="width: 17%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 18" style="width: 18%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 19" style="width: 19%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 20" style="width: 20%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 21" style="width: 21%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 22" style="width: 22%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 23" style="width: 23%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 24" style="width: 24%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 25" style="width: 25%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 26" style="width: 26%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 27" style="width: 27%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 28" style="width: 28%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 29" style="width: 29%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 30" style="width: 30%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 31" style="width: 31%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 32" style="width: 32%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 33" style="width: 33%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 34" style="width: 34%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 35" style="width: 35%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 36" style="width: 36%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 37" style="width: 37%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 38" style="width: 38%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 39" style="width: 39%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 40" style="width: 40%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 41" style="width: 41%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 42" style="width: 42%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 43" style="width: 43%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 44" style="width: 44%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 45" style="width: 45%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 46" style="width: 46%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 47" style="width: 47%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 48" style="width: 48%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 49" style="width: 49%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 50" style="width: 50%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 51" style="width: 51%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 52" style="width: 52%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 53" style="width: 53%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 54" style="width: 54%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 55" style="width: 55%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 56" style="width: 56%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 57" style="width: 57%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 58" style="width: 58%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 59" style="width: 59%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 60" style="width: 60%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 61" style="width: 61%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 62" style="width: 62%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 63" style="width: 63%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 64" style="width: 64%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 65" style="width: 65%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 66" style="width: 66%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 67" style="width: 67%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 68" style="width: 68%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 69" style="width: 69%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 70" style="width: 70%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 71" style="width: 71%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 72" style="width: 72%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 73" style="width: 73%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 74" style="width: 74%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 75" style="width: 75%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 76" style="width: 76%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 77" style="width: 77%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 78" style="width: 78%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 79" style="width: 79%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 80" style="width: 80%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 81" style="width: 81%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 82" style="width: 82%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 83" style="width: 83%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 84" style="width: 84%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 85" style="width: 85%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 86" style="width: 86%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 87" style="width: 87%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 88" style="width: 88%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 89" style="width: 89%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 90" style="width: 90%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 91" style="width: 91%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 92" style="width: 92%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 93" style="width: 93%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 94" style="width: 94%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 95" style="width: 95%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 96" style="width: 96%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 97" style="width: 97%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 98" style="width: 98%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 99" style="width: 99%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                  <div class="progress-bar bg-green" th:if="${item.percentage} eq 100" style="width: 100%" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100"></div>
+                </div>
+                <small th:text="${item.percentage}">
+                </small>
+                <small>
+                  % 剩余
+                </small>
+              </td>
+              <td class="project-state">
+                <span class="badge badge-success" th:if="${item.book_nowsum} gt 0">有空余</span>
+                <span class="badge badge-success" th:if="${item.book_nowsum} eq 0" style="background: red">已借完</span>
+              </td>
+              <td class="project-actions text-right">
+                <a class="btn btn-primary btn-sm" th:href="@{vbooki(book_id=${item.book_id},stu_id=${student.stu_id})}">
+                  <i class="fas fa-folder">
+                  </i>
+                  查看
+                </a>
+                <!--                          <a class="btn btn-info btn-sm" href="#">-->
+                <!--                              <i class="fas fa-pencil-alt">-->
+                <!--                              </i>-->
+                <!--                              edit-->
+                <!--                          </a>-->
+                <a class="btn btn-danger btn-sm" style="color:white" th:onclick="check([[${item.book_nowsum}]], [[${student.stu_sum}]], [[${student.stu_limit}]], [[${student.stu_id}]], [[${item.book_id}]], [[${student.stu_pwd}]])">
+                  <i class="fas fa-trash">
+                  </i>
+                  借书
+                </a>
+                <script>
+                  function check(sum, now , limit, stu_id, book_id, stu_pwd) {
+                    //alert("im in");
+                    if (sum > 0 && now < limit){
+                      //alert(sum + " " + now + " " + limit + " " + stu_id + " " + book_id);
+                      window.location.href="stu_borrow_book?stu_id=" + stu_id + "&&book_id=" + book_id + "&&stu_pwd=" + stu_pwd;
+                    } else if (sum <= 0){
+                      alert("已无书剩余");
+                      return false;
+                    } else {
+                      alert("借书本数超过上限");
+                      return false;
+                    }
+                  }
+                </script>
+              </td>
+            </tr>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <footer class="main-footer">
+    <div class="float-right d-none d-sm-block">
+      <b>Version</b> 3.0.1
+    </div>
+    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
+    reserved.
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+</body>
+</html>
